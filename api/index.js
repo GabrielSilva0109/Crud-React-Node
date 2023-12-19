@@ -1,18 +1,24 @@
-//EXPRESS Simplifica a criação dos Servidores usando NODE.JS
-import express from "express"
+// Importar o módulo Express corretamente
+import express from 'express';
 
-//USERROUTES São as rotas HTTP "GET" "PUT" "POST" "DELETE"
-import userRoutes from "./routes/users.js"
+// Importar as rotas dos usuários
+import userRoutes from './routes/users.js';
 
-//CORS Cuida da segurança das requisições
-import cors from "cors"
+// Importar o módulo CORS
+import cors from 'cors';
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+// Permitir o uso de JSON no Express
+app.use(express.json());
 
-app.use(cors())
+// Habilitar o CORS
+app.use(cors());
 
-app.use("/", userRoutes)
+// Definir as rotas para os usuários
+app.use('/', userRoutes);
 
-app.listen(8800)
+// Iniciar o servidor na porta 8800
+app.listen(8800, () => {
+  console.log('Servidor rodando na porta 8800');
+});

@@ -1,7 +1,13 @@
-import { express } from "express";
+import express from 'express';
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", getUser)
+// Rota GET "/"
+const getUser = (req, res) => {
+  
+  res.send('Informações do usuário');
+};
 
-export default router
+router.get("/", getUser);
+
+export default router;
