@@ -3,11 +3,16 @@ import { addUser, deleteUser, getUsers, updateUser } from "../controllers/user.j
 
 const router = express.Router();
 
-// Rota GET "/"
 const getUser = (req, res) => {
   res.send('Informações do usuário');
 };
 
-router.get("/", getUser);
+router.get("/", getUsers);
+
+router.post("/", addUser)
+
+router.put("/:id", updateUser)
+
+router.delete("/:id", deleteUser)
 
 export default router;
