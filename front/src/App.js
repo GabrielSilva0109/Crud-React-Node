@@ -4,8 +4,9 @@ import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import FormContainer from "./components/Form"
 import Grid from "./components/Grid";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Form from "./components/Form";
 
 const Container = styled.div `
   width: 100%;
@@ -33,14 +34,18 @@ function App() {
       toast.error(error)
     }
   }
+
+  useEffect(() => {
+    getUsers()
+  }, {setUsers})
   
   return (
     <>
     <Container>
       <Title>Usuários</Title>
+      <Form />
+      <Grid users={users}/>
     </Container>
-    <FormContainer></FormContainer>
-    <Grid></Grid>
     <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
     </>
