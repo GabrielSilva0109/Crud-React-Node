@@ -89,7 +89,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         .catch(({ data }) => toast.error(data));
     }
 
-    user.nome.value = " ";
+    user.nome.value = "";
     user.email.value = "";
     user.fone.value = "";
     user.data_nascimento.value = "";
