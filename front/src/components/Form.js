@@ -101,6 +101,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
+      <Label>#2c73d2</Label>
         <Label>Nome</Label>
         <Input name="nome" />
       </InputArea>
