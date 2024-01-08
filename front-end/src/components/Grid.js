@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
+import { format } from 'date-fns'; 
+// Estilos de componentes
 const Table = styled.table`
   width: 100%;
   background: #fff;
@@ -15,11 +16,9 @@ const Table = styled.table`
   word-break: break-all;
 `;
 
-export const Thead = styled.thead``;
-
-export const Tr = styled.tr``;
-
-export const Th = styled.th`
+const Thead = styled.thead``;
+const Tr = styled.tr``;
+const Th = styled.th`
   text-align: start;
   border-bottom: inset;
   padding-bottom: 5px;
@@ -28,20 +27,18 @@ export const Th = styled.th`
     ${(props) => props.onlyWeb && 'display: none'}
   }
 `;
-
-export const Tbody = styled.tbody``;
-
-export const Td = styled.td`
+const Tbody = styled.tbody``;
+const Td = styled.td`
   padding-top: 15px;
-  text-align: ${(props) => (props.alignCenter ? 'center' : 'start')}
-  width: ${(props) => (props.onlyWeb && 'display: none')}
+  text-align: ${(props) => (props.alignCenter ? 'center' : 'start')};
+  width: ${(props) => (props.onlyWeb && 'display: none')};
 
-  @media (maax-width: 500px){
+  @media (max-width: 500px) {
     ${(props) => props.onlyWeb && 'display: none;'}
   }
 `;
 
-const Grid = ({ users }) => {
+const Grid = ({ users, getUsers }) => {
   const updateUser = async (userId) => {
     try {
       const response = await axios.put(`http://localhost:8800/${userId}`, {
@@ -52,22 +49,22 @@ const Grid = ({ users }) => {
         // fone: '123456789',
         // data_nascimento: '2000-01-01'
       });
-      console.log(response.data);
-      // Lidar com a resposta
+      toast.success(response.data);
+      getUsers();
     } catch (error) {
+      toast.error('Erro ao atualizar usuário');
       console.error('Erro ao atualizar usuário:', error);
-      // Lidar com o erro
     }
   };
 
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(`http://localhost:8800/${userId}`);
-      console.log(response.data);
-      // Lidar com a resposta
+      toast.success(response.data);
+      getUsers();
     } catch (error) {
+      toast.error('Erro ao excluir usuário');
       console.error('Erro ao excluir usuário:', error);
-      // Lidar com o erro
     }
   };
 
@@ -85,9 +82,10 @@ const Grid = ({ users }) => {
       <Tbody>
         {users.map((item, i) => (
           <Tr key={i}>
-            <Td width="30%">{item.nome}</Td>
+            <Td width="20%">{item.nome}</Td>
             <Td width="30%">{item.email}</Td>
             <Td width="20%" onlyWeb>{item.fone}</Td>
+            <Td width="20%" onlyWeb>{format(new Date(item.data_nasc), 'dd/MM/yyyy')}</Td>
             <Td alignCenter width="5%">
               <FaEdit onClick={() => updateUser(item.id)} />
             </Td>
