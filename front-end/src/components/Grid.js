@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { format } from 'date-fns'; 
+
 // Estilos de componentes
 const Table = styled.table`
   width: 100%;
@@ -85,7 +85,7 @@ const Grid = ({ users, getUsers }) => {
             <Td width="20%">{item.nome}</Td>
             <Td width="30%">{item.email}</Td>
             <Td width="20%" onlyWeb>{item.fone}</Td>
-            <Td width="20%" onlyWeb>{format(new Date(item.data_nasc), 'dd/MM/yyyy')}</Td>
+            <Td width="20%" onlyWeb>{item.data_nasc}</Td>
             <Td alignCenter width="5%">
               <FaEdit onClick={() => updateUser(item.id)} />
             </Td>
