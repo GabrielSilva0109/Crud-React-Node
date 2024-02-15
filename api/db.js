@@ -3,8 +3,8 @@ import mysql from "mysql";
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "3945",
-    database: "kanban"
+    password: "root",
+    database: "smart"
 });
 
 // Inicia a conexão com o banco de dados
